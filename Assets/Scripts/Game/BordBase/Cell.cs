@@ -1,12 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
 public class Cell : MonoBehaviour
 {
-    public class CellFactory :PlaceholderFactory<Cell> 
-    {
-
-    }
+    public class CellFactory : PlaceholderFactory<Cell> { }
 }
