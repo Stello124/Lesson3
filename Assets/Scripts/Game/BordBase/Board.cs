@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -18,8 +19,10 @@ public class Board : MonoBehaviour
         Cells = new Cell[Rows, Cols];
 
         CreateCells();
+        PrepareCells();
     }
 
+   
     private void CreateCells()
     {
         for (int x = 0; x < Rows; x++)
@@ -32,4 +35,15 @@ public class Board : MonoBehaviour
             }
         }
     }
+    private void PrepareCells()
+    {
+        for (int x = 0; x < Rows; x++)
+        {
+            for (int y = 0; y < Cols; y++)
+            {
+                Cells[x, y].Prepare(x, y);
+            }
+        }
+    }
+
 }
