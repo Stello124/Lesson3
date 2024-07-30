@@ -5,8 +5,11 @@ using Zenject;
 public class GameplayInstaller : ScriptableObjectInstaller<GameplayInstaller>
 {
     [SerializeField] private Cell cellPrefab;
+    [SerializeField] private Item itemBasePrefab;
     public override void InstallBindings()
     {
-        Container.BindFactory<Cell, Cell.CellFactory>().FromComponentInNewPrefab(cellPrefab);
+        Container.BindFactory<Cell, Cell.CellFactory>().FromComponentInNewPrefab(cellPrefab).AsSingle();
+        Container.BindFactory<ItemBase, ItemBase.ItemBaseFactory>().FromComponentInNewPrefab(itemBasePrefab).AsSingle();
+
     }
 }
