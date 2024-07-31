@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -5,9 +6,14 @@ using Zenject;
 public class Cell : MonoBehaviour, ITouchable
 {
     [SerializeField] private TextMeshPro labelText;
-    public int X {  get; private set; }
-    public int Y {  get; private set; }
-    public ListPool<Cell> Neighbors { get; private set; } = new();
+
+    [Inject] private Board _board;
+
+    public bool IsFillingCell { get; private set; }
+    public int X { get; private set; }
+    public int Y { get; private set; }
+    public List<Cell> Neighbors { get; private set; } = new();
+
     public Item Item
     {
         get => _item;
@@ -31,14 +37,26 @@ public class Cell : MonoBehaviour, ITouchable
     }
     private Item _item;
 
-
     public void Prepare(int x, int y)
     {
-        X = x; 
-        Y = y; 
+        X = x;
+        Y = y;
 
-        transform.localPosition = new Vector3(X, Y);
+        IsFillingCell = Y == _board.Cols - 1;
+        transform.localPosition = new Vector3(x, y);
+
         SetLabel();
+    }
+
+    public bool HasItem()
+    {
+        return Item != null;
+    }
+
+    public bool IsFalling()
+    {
+        //todo: update here
+        return false;
     }
 
     private void SetLabel()
@@ -47,7 +65,6 @@ public class Cell : MonoBehaviour, ITouchable
         labelText.text = cellName;
         gameObject.name = $"Cell {cellName}";
     }
-
 
     public class CellFactory : PlaceholderFactory<Cell> { }
 }
