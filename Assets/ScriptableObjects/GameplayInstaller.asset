@@ -12,3 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 950c8681961513040ac1262ce7b00728, type: 3}
   m_Name: GameplayInstaller
   m_EditorClassIdentifier: 
+  cellPrefab: {fileID: 7136423831523660140, guid: b178b3e620f82854fbe5378584f4b913,
+    type: 3}
+  itemBasePrefab: {fileID: 5874866594658575690, guid: 5d9f4563b1bf1fe45b2077a0580d6a85,
+    type: 3}

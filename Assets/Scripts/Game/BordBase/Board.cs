@@ -7,10 +7,21 @@ public class Board : MonoBehaviour
     [SerializeField] private Transform cellParent;
 
     [Inject] private Cell.CellFactory _cellFactory;
+    [Inject] private SignalBus _signalBus;
 
     public int Rows { get; private set; }
     public int Cols { get; private set; }
     public Cell[,] Cells { get; private set; }
+
+    private void Awake()
+    {
+        _signalBus.Subscribe<OnElementTappedSignal>(CellTapped);
+    }
+
+    private void OnDestroy()
+    {
+        _signalBus.Unsubscribe<OnElementTappedSignal>(CellTapped);
+    }
 
     public void Prepare(int row, int col)
     {
@@ -20,6 +31,11 @@ public class Board : MonoBehaviour
 
         CreateCells();
         PrepareCells();
+    }
+
+    private void CellTapped(OnElementTappedSignal signal) 
+    {
+        var cell = signal.Touchable.gameObject.GetComponent<Cell>();
     }
 
    
