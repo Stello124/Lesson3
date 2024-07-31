@@ -3,10 +3,12 @@ using System.Collections;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Zenject;
 
 public class TouchManager : MonoBehaviour
 {
     [SerializeField] private float firstTapDelayDuration;
+    [Inject] private SignalBus _signalBus;
 
     private CancellationTokenSource _cts;
     private Camera _cam;
@@ -46,12 +48,14 @@ public class TouchManager : MonoBehaviour
             {
                 if (hit.gameObject.TryGetComponent(out ITouchable selectedElement))
                 {
-                    TouchEvents.OnElementTapped?.Invoke(selectedElement);
+                    //TouchEvents.OnElementTapped?.Invoke(selectedElement);
+                    _signalBus.Fire(new OnElementTappedSignal(selectedElement));
                 }
             }
             else
             {
-                TouchEvents.OnEmptyTapped?.Invoke();
+                //TouchEvents.OnEmptyTapped?.Invoke();
+                _signalBus?.Fire<OnEmptyTappedSignal>();
             }
         }
     }
@@ -77,13 +81,28 @@ public class TouchManager : MonoBehaviour
     }
 }
 
-public static class TouchEvents
+public struct OnElementTappedSignal
 {
-    public static Action<ITouchable> OnElementTapped;
-    public static Action OnEmptyTapped;
+    public readonly ITouchable Touchable;
+
+    public OnElementTappedSignal(ITouchable touchable)
+    {
+        Touchable = touchable;
+    }
 }
+
+public struct OnEmptyTappedSignal { }
 
 public interface ITouchable
 {
     GameObject gameObject { get; }
+}
+
+
+
+
+public static class TouchEvents
+{
+    public static Action<ITouchable> OnElementTapped;
+    public static Action OnEmptyTapped;
 }
