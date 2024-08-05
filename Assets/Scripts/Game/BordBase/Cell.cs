@@ -10,6 +10,7 @@ public class Cell : MonoBehaviour, ITouchable
     [Inject] private Board _board;
 
     public bool IsFillingCell { get; private set; }
+    public List<Cell> Neighbours { get; private set; } = new();
     public int X { get; private set; }
     public int Y { get; private set; }
     public List<Cell> Neighbors { get; private set; } = new();
@@ -57,6 +58,19 @@ public class Cell : MonoBehaviour, ITouchable
     {
         //todo: update here
         return false;
+    }
+
+    private void UpdateNeighnours()
+    {
+        var up = _board.GetNeighbourWithDirection(this,Direction.Up);
+        var down = _board.GetNeighbourWithDirection(this,Direction.Down);
+        var left = _board.GetNeighbourWithDirection(this,Direction.Left);
+        var right = _board.GetNeighbourWithDirection(this,Direction.Right);
+
+        if (up != null) Neighbors.Add(up);
+        if (down != null) Neighbors.Add(down);
+        if (left != null) Neighbors.Add(left);
+        if (right != null) Neighbors.Add(right);
     }
 
     private void SetLabel()

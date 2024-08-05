@@ -33,12 +33,9 @@ public class Board : MonoBehaviour
         PrepareCells();
     }
 
-    private void CellTapped(OnElementTappedSignal signal)
-    {
-        var cell = signal.Touchable.gameObject.GetComponent<Cell>();
-    }
+    
 
-    private Cell GetNeighbourWithDirection(Cell cell, Direction direction)
+    public Cell GetNeighbourWithDirection(Cell cell, Direction direction)
     {
         var x = cell.X;
         var y = cell.Y;
@@ -86,6 +83,12 @@ public class Board : MonoBehaviour
 
         return Cells[x, y];
     }
+    
+    private void CellTapped(OnElementTappedSignal signal)
+    {
+        var cell = signal.Touchable.gameObject.GetComponent<Cell>();
+    }
+
     private void CreateCells()
     {
         for (int x = 0; x < Rows; x++)
