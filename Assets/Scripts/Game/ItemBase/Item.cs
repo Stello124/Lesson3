@@ -1,31 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
 public class Item : MonoBehaviour
 {
-    public Cell Cell 
+    public Cell Cell
     {
         get => _cell;
-        set 
+        set
         {
             if (_cell == value) return;
 
-            var oldCell= _cell;
+            var oldCell = _cell;
             _cell = value;
 
-            if (oldCell != null && Equals(oldCell.Item,this))
+            if (oldCell != null && Equals(oldCell.Item, this))
             {
                 oldCell.Item = null;
             }
 
             if (value == null) return;
 
-            value.Item =this;
-            gameObject.name = _cell.gameObject.name+ " " + GetType().Name;
-
+            value.Item = this;
+            gameObject.name = _cell.gameObject.name + " " + GetType().Name;
         }
     }
     private Cell _cell;
+
+    public class Factory : PlaceholderFactory<Item> { }
 }
