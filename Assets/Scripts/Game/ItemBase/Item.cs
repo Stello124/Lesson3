@@ -69,6 +69,11 @@ public abstract class Item : MonoBehaviour
 
     public virtual void SetHint(int groupCount) { }
 
+    protected virtual void ChangeSprite(Sprite newSprite)
+    {
+        _spriteRenderer.sprite = newSprite;
+    }
+
     protected void Init(ItemBase itemBase, Sprite sprite)
     {
         _spriteRenderer = AddSprite(sprite);

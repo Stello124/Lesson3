@@ -42,5 +42,103 @@ namespace Game.Items
 
             return null;
         }
+
+        public override void SetHint(int groupCount)
+        {
+            if (!MatchHelpers.IsMinSpecialMatch(groupCount))
+            {
+                SetDefaultItemSprite();
+            }
+            else if (MatchHelpers.IsRocketMatch(groupCount))
+            {
+                switch (_matchType)
+                {
+                    case MatchType.None:
+                        break;
+                    case MatchType.Green:
+                        ChangeSprite(_imageLibService.Images.greenCubeRocket);
+                        break;
+                    case MatchType.Yellow:
+                        ChangeSprite(_imageLibService.Images.yellowCubeRocket);
+                        break;
+                    case MatchType.Blue:
+                        ChangeSprite(_imageLibService.Images.blueCubeRocket);
+                        break;
+                    case MatchType.Red:
+                        ChangeSprite(_imageLibService.Images.redCubeRocket);
+                        break;
+                    case MatchType.Pink:
+                        ChangeSprite(_imageLibService.Images.pinkCubeRocket);
+                        break;
+                    case MatchType.Purple:
+                        ChangeSprite(_imageLibService.Images.purpleCubeRocket);
+                        break;
+                    case MatchType.SpecialType:
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+            else if (MatchHelpers.IsBombMatch(groupCount))
+            {
+                switch (_matchType)
+                {
+                    case MatchType.None:
+                        break;
+                    case MatchType.Green:
+                        ChangeSprite(_imageLibService.Images.greenCubeBomb);
+                        break;
+                    case MatchType.Yellow:
+                        ChangeSprite(_imageLibService.Images.yellowCubeBomb);
+                        break;
+                    case MatchType.Blue:
+                        ChangeSprite(_imageLibService.Images.blueCubeBomb);
+                        break;
+                    case MatchType.Red:
+                        ChangeSprite(_imageLibService.Images.redCubeBomb);
+                        break;
+                    case MatchType.Pink:
+                        ChangeSprite(_imageLibService.Images.pinkCubeBomb);
+                        break;
+                    case MatchType.Purple:
+                        ChangeSprite(_imageLibService.Images.purpleCubeBomb);
+                        break;
+                    case MatchType.SpecialType:
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+            else if (MatchHelpers.IsDiscoMatch(groupCount))
+            {
+                switch (_matchType)
+                {
+                    case MatchType.None:
+                        break;
+                    case MatchType.Green:
+                        ChangeSprite(_imageLibService.Images.greenCubeDisco);
+                        break;
+                    case MatchType.Yellow:
+                        ChangeSprite(_imageLibService.Images.yellowCubeDisco);
+                        break;
+                    case MatchType.Blue:
+                        ChangeSprite(_imageLibService.Images.blueCubeDisco);
+                        break;
+                    case MatchType.Red:
+                        ChangeSprite(_imageLibService.Images.redCubeDisco);
+                        break;
+                    case MatchType.Pink:
+                        ChangeSprite(_imageLibService.Images.pinkCubeDisco);
+                        break;
+                    case MatchType.Purple:
+                        ChangeSprite(_imageLibService.Images.purpleCubeDisco);
+                        break;
+                    case MatchType.SpecialType:
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+        }
     }
 }
