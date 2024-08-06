@@ -140,5 +140,25 @@ namespace Game.Items
                 }
             }
         }
+
+        public override MatchType GetMatchType()
+        {
+            return _matchType;
+        }
+
+        public override ItemType GetItemType()
+        {
+            return ItemType;
+        }
+
+        public override void TryExecute()
+        {
+            base.TryExecute();
+        }
+
+        protected override Sprite GetDefaultItemSprite()
+        {
+            return GetSpriteForMatchType();
+        }
     }
 }
