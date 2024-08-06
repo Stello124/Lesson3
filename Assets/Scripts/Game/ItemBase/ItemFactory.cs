@@ -1,4 +1,3 @@
-using Game.Items;
 using System;
 using UnityEngine;
 using Zenject;
