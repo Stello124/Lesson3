@@ -1,6 +1,8 @@
+using Game.Items;
 using System;
 using UnityEngine;
 using Zenject;
+using static UnityEditor.Progress;
 
 public class ItemFactory : MonoBehaviour
 {
@@ -10,21 +12,28 @@ public class ItemFactory : MonoBehaviour
     public Item Create(ItemType itemType, Transform parent, int layerCount = 2, ItemType itemTypeCliked = ItemType.None)
     {
         var itemBase = _itemBaseFactory.Create();
+        Item item = null;
         switch (itemType)
         {
             case ItemType.None:
                 break;
             case ItemType.GreenCube:
+                item = CreateCubeItem(itemBase, MatchType.Green, itemType);
                 break;
             case ItemType.YellowCube:
+                item = CreateCubeItem(itemBase, MatchType.Yellow, itemType);
                 break;
             case ItemType.BlueCube:
+                item = CreateCubeItem(itemBase, MatchType.Blue, itemType);
                 break;
             case ItemType.RedCube:
+                item = CreateCubeItem(itemBase, MatchType.Red, itemType);
                 break;
             case ItemType.PinkCube:
+                item = CreateCubeItem(itemBase, MatchType.Pink, itemType);
                 break;
             case ItemType.PurpleCube:
+                item = CreateCubeItem(itemBase, MatchType.Purple, itemType);
                 break;
             case ItemType.Balloon:
                 break;
@@ -55,5 +64,14 @@ public class ItemFactory : MonoBehaviour
         }
 
         return null; //todo: return item
+    }
+
+
+    private Item CreateCubeItem(ItemBase itemBase, MatchType matchType, ItemType itemtype)
+    {
+        var cubeItem = itemBase.gameObject.AddComponent<CubeItem>();
+        cubeItem.Prepare(itemBase, matchType, itemtype);
+
+        return cubeItem;
     }
 }
