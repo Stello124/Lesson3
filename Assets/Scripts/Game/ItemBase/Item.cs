@@ -101,5 +101,5 @@ public abstract class Item : MonoBehaviour
         return spriteRenderer;
     }
 
-    public class Factory : PlaceholderFactory<Item> { }
+    
 }

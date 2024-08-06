@@ -13,7 +13,7 @@ public class Cell : MonoBehaviour, ITouchable
     public List<Cell> Neighbours { get; private set; } = new();
     public int X { get; private set; }
     public int Y { get; private set; }
-    public List<Cell> Neighbors { get; private set; } = new();
+    
 
     public Item Item
     {
@@ -67,10 +67,10 @@ public class Cell : MonoBehaviour, ITouchable
         var left = _board.GetNeighbourWithDirection(this,Direction.Left);
         var right = _board.GetNeighbourWithDirection(this,Direction.Right);
 
-        if (up != null) Neighbors.Add(up);
-        if (down != null) Neighbors.Add(down);
-        if (left != null) Neighbors.Add(left);
-        if (right != null) Neighbors.Add(right);
+        if (up != null) Neighbours.Add(up);
+        if (down != null) Neighbours.Add(down);
+        if (left != null) Neighbours.Add(left);
+        if (right != null) Neighbours.Add(right);
     }
 
     private void SetLabel()
